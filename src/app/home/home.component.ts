@@ -37,8 +37,7 @@ export class HomeComponent implements OnInit {
 
     //get recent weather
       this.weatherService
-        .getWeather()
-        .subscribe((response: any) => {
+        .getWeather().subscribe((response: any) => {
 
           if(response) {
             this.today = response;
