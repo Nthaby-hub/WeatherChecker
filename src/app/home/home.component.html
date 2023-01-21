@@ -1,23 +1,17 @@
 
-<button (click)="networkNotif()" >click me</button>
-
 <div class="container">
   <div class="top">
     <div class="t-left">
 
-      <!-- <mat-button-toggle-group [(value)]="selected" appearance="legacy" name="fontStyle" aria-label="Font Style">
+      <mat-button-toggle-group [(value)]="selected" appearance="legacy" name="fontStyle" aria-label="Font Style">
         <mat-button-toggle value="celsius">Metric: °C, m/s</mat-button-toggle>
         <mat-button-toggle value="fahrenheit">Imperial: °F, mph</mat-button-toggle>
       </mat-button-toggle-group>
 
       <div class="today" *ngIf="selected == 'celsius'">
         <p>{{dt | date: 'MMM dd, HH:MM'}}</p>
-        <h1>{{today.name}}, {{today.sys.country}}</h1> -->
-        <!-- <img
-          [src]="today.weather[0].icon.png"
-          [alt]="today.weather[0].desciption"
-        /> -->
-        <!-- <label class="temp">{{temp}}°c</label>
+        <h1>{{today.name}}, {{today.sys.country}}</h1>
+        <label class="temp">{{temp}}°c</label>
 
         <br>
         <label class="descrip">Feels like&nbsp;&nbsp; {{feels}}°c</label>
@@ -45,9 +39,8 @@
       <h2>Forecast</h2>
 
       <mat-list *ngIf="selected == 'celsius'">
-        <mat-list-item *ngFor="let item of weather"> -->
-          <!-- <img [src]="item.weather[0].icon"> -->
-          <!-- <span matListItemTitle>{{item.dt*1000 | date: 'MMM dd, HH:MM'}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-list-item *ngFor="let item of weather">
+          <span matListItemTitle>{{item.dt*1000 | date: 'MMM dd, HH:MM'}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
           <span matListItemLine> {{Math.round((item.main.temp-273.15)*100)/100}}°c </span>
            &nbsp;&nbsp;&nbsp;&nbsp;
           <span class="descrip" matListItemLine> {{item.weather[0].description}} </span>
@@ -61,7 +54,7 @@
            &nbsp;&nbsp;&nbsp;&nbsp;
           <span class="descrip" matListItemLine> {{item.weather[0].description}} </span>
         </mat-list-item>
-      </mat-list> -->
+      </mat-list>
 
   </div>
 </div>

@@ -35,6 +35,7 @@ export class HomeComponent implements OnInit {
 
     this.selected = "celsius";
 
+    //get recent weather
       this.weatherService
         .getWeather()
         .subscribe((response: any) => {
@@ -56,6 +57,7 @@ export class HomeComponent implements OnInit {
           this.networkNotif();
         });
 
+        //subscribe to forecast weather
       this.weatherService
         .getForecast()
         .subscribe((response: any) => {
