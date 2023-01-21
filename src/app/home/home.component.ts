@@ -16,24 +16,19 @@ export class HomeComponent implements OnInit {
   dt: any;
   temp: any;
   feels: any;
-  parseFloat: any;
   Math: any;
   country: any;
-  timer = 0;
 
   selected: any;
-  display: any;
   time: number = 0;
   interval: any;
-  inRange: boolean = true;
-  showAlert: boolean = false;
-  currentTemperature: number = 0;
+
+  timerInterval: any;
 
   constructor(
     private weatherService: WeatherService
   ) {
     this.Math = Math;
-    this.parseFloat = parseFloat;
   }
 
   ngOnInit(): void {
@@ -46,7 +41,10 @@ export class HomeComponent implements OnInit {
 
           if(response) {
             this.today = response;
+            //convert time to sast
             this.dt = this.today.dt*1000;
+
+            //convert temperature to metrics
             this.temp = Math.round((this.today.main.temp-273.15)*100)/100;
             this.feels = Math.round((this.today.main.feels_like-273.15)*100)/100
 
@@ -55,18 +53,7 @@ export class HomeComponent implements OnInit {
           }
         },
         (error) => {
-          // window.location.reload()
-
-          this.interval = setInterval(() => {
-            this.time++;
-            this.display = this.transform(this.time);
-
-            // alert('Api ERROR'+this.time);
-
-            if(this.time == 15) {
-              window.location.reload();
-            }
-          }, 1000);
+          this.networkNotif();
         });
 
       this.weatherService
@@ -83,7 +70,7 @@ export class HomeComponent implements OnInit {
         this.transform(this.time);
 
         if(this.time == 20*60) {
-          window.location.reload();
+          this.reloadPage();
         }
       }, 1000);
 
@@ -98,33 +85,61 @@ export class HomeComponent implements OnInit {
        return minutes + ':' + (value - minutes * 60);
   }
 
-  checkTemperature() {
-    if (this.temp < 15 || this.temp > 25) {
-      this.showAlert = true;
-    } else {
-      this.showAlert = false;
+  ngOnChanges(changes: SimpleChanges) {
+    //check when the temp changes
+    if (changes['temp']) {
+      //set current and previous values of temperature
+      const currentTemperature = changes['temp'].currentValue;
+      const previousTemperature = changes['temp'].previousValue;
+
+      //notifies the user when previousTemperature leaves the 12-25 range
+      if(previousTemperature >= 15 && previousTemperature <= 25) {
+        if(currentTemperature < 15 || currentTemperature > 25) {
+          this.weatherNotif();
+        }
+      }
     }
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   if (changes['temp']) {
-  //     const currentTemperature = changes['temp'].currentValue;
-  //     const previousTemperature = changes.temperature.previousValue;
-  //     if (currentTemperature !== previousTemperature) {
-  //       // temperature value has changed
-  //       this.previousTemperature = previousTemperature;
-  //       this.checkTemperature();
-  //     }
-  //   }
-  // }
+  //use third party library for notifications
+  networkNotif() {
+    Swal.fire({
+      html: 'Something went wrong. Reloading in a few seconds',
+      timer: 10000,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      confirmButtonText: 'Reload now',
+      willClose: () => {
+        clearInterval(this.timerInterval)
+      }
+    }).then((result) => {
+      if (result.dismiss) {
+        this.reloadPage();
+      } else
+      if (result.isConfirmed) {
+        this.reloadPage();
+      }
+    })
+  }
 
-  notification() {
+  //use third party library for notifications
+  weatherNotif() {
     Swal.fire({
       position: 'top-end',
-      icon: 'success',
-      title: 'Your work has been saved',
-      showConfirmButton: true,
-      timer: 9000
+      html: 'The temperature is now '+this.temp,
+      timer: 10000,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      confirmButtonText: 'ok',
+      didOpen: () => {
+        Swal.showLoading
+        const b = Swal.getHtmlContainer()?.querySelector('b')
+        this.timerInterval = setInterval(() => {
+        }, 10000)
+      },
+      willClose: () => {
+        clearInterval(this.timerInterval)
+      }
     })
   }
 

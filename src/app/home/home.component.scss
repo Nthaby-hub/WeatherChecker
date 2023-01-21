@@ -1,0 +1,49 @@
+.top {
+  margin: 50px;
+}
+.temp {
+  font-size: xx-large;
+}
+.bottom {
+  margin: 50px;
+  display: flex;
+  @media only screen and (max-width: 1048px) {
+    display: block;
+  }
+}
+.b-right {
+  padding-left: 30px;
+  @media only screen and (max-width: 1048px) {
+    margin-top: 50px;
+  }
+}
+.b-left {
+  img{
+    @media only screen and (max-width: 1200px) {
+      height: 390px;
+    }
+  }
+
+}
+mat-button-toggle-group {
+  left: 60%;
+  // height: 30px;
+
+  mat-button-toggle {
+    // height: 30px;
+    text-align: center;
+  }
+}
+
+.today {
+  position: relative;
+  p {
+    color: orange;
+  }
+}
+.descrip {
+  color: #818181;
+}
+img {
+  border-radius: 8px;
+}

@@ -1,2 +1,67 @@
-<p>home works!</p>
-<button (click)="notification()" >click me</button>
+
+<button (click)="networkNotif()" >click me</button>
+
+<div class="container">
+  <div class="top">
+    <div class="t-left">
+
+      <!-- <mat-button-toggle-group [(value)]="selected" appearance="legacy" name="fontStyle" aria-label="Font Style">
+        <mat-button-toggle value="celsius">Metric: °C, m/s</mat-button-toggle>
+        <mat-button-toggle value="fahrenheit">Imperial: °F, mph</mat-button-toggle>
+      </mat-button-toggle-group>
+
+      <div class="today" *ngIf="selected == 'celsius'">
+        <p>{{dt | date: 'MMM dd, HH:MM'}}</p>
+        <h1>{{today.name}}, {{today.sys.country}}</h1> -->
+        <!-- <img
+          [src]="today.weather[0].icon.png"
+          [alt]="today.weather[0].desciption"
+        /> -->
+        <!-- <label class="temp">{{temp}}°c</label>
+
+        <br>
+        <label class="descrip">Feels like&nbsp;&nbsp; {{feels}}°c</label>
+
+      </div>
+
+      <div class="today" *ngIf="selected == 'fahrenheit'">
+        <p>{{dt | date: 'MMM dd, HH:MM'}}</p>
+        <h1>{{today.name}}, {{country}}</h1>
+
+        <label class="temp">{{Math.round(((today.main.temp-273.15)*9/5+32)*100)/100}}°f</label>
+
+        <br>
+        <label>Feels like&nbsp;&nbsp; {{Math.round(((today.main.feels_like-273.15)*9/5+32)*100)/100}}°f</label>
+
+      </div>
+
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="b-left">
+      <img src="assets/cape-town.jpeg">
+    </div>
+    <div class="b-right">
+      <h2>Forecast</h2>
+
+      <mat-list *ngIf="selected == 'celsius'">
+        <mat-list-item *ngFor="let item of weather"> -->
+          <!-- <img [src]="item.weather[0].icon"> -->
+          <!-- <span matListItemTitle>{{item.dt*1000 | date: 'MMM dd, HH:MM'}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+          <span matListItemLine> {{Math.round((item.main.temp-273.15)*100)/100}}°c </span>
+           &nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="descrip" matListItemLine> {{item.weather[0].description}} </span>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-list *ngIf="selected == 'fahrenheit'">
+        <mat-list-item *ngFor="let item of weather">
+          <span matListItemTitle>{{item.dt*1000 | date: 'MMM dd, HH:MM'}}</span> &nbsp;&nbsp;&nbsp;&nbsp;
+          <span matListItemLine> {{Math.round(((item.main.temp-273.15)*9/5+32)*100)/100}}°f </span>
+           &nbsp;&nbsp;&nbsp;&nbsp;
+          <span class="descrip" matListItemLine> {{item.weather[0].description}} </span>
+        </mat-list-item>
+      </mat-list> -->
+
+  </div>
+</div>
